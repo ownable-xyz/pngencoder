@@ -1,0 +1,66 @@
+# pngencoder: an on-chain PNG/APNG encoder for the Cancun EVM. It copies bytes
+# with MCOPY.
+#
+# This project requires the Cancun EVM. The buffer copy path uses the MCOPY
+# opcode (EIP-5656), because byte copies use most of the gas of the encoder. The
+# build requires foundry >= 1.0 (Cancun support) and solc >= 0.8.24 (the `mcopy`
+# inline-assembly builtin).
+[profile.default]
+src = "src"
+test = "test"
+out = "out"
+libs = ["lib"]
+solc_version = "0.8.28"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+bytecode_hash = "none"
+cbor_metadata = false
+# The `*Deflate` encodings (LZ77) use much gas. This limit lets the demo script
+# and the gas tests run. It has no effect on deployed behaviour. On-chain, the
+# `eth_call` budgets apply, and the stored paths stay cheap.
+gas_limit = "18446744073709551615"
+# This limit lets the regression test for the 32 KB window
+# (test_MatchAtDistance32768_RoundTrips) do a round trip through the test-only
+# InflateLib. InflateLib adds each output byte with `bytes.concat`. Thus its
+# peak EVM memory is O(n^2) for a decode of ~32 KB. The limit applies to the
+# test harness only. It has no effect on compiled or deployed bytecode.
+memory_limit = 1073741824
+# The demo script (script/Demo.s.sol) writes a rendered PNG to this directory.
+fs_permissions = [{ access = "read-write", path = "./demo" }]
+
+[profile.ci]
+# These are the same settings. They are explicit so that the cause of a CI
+# failure is clear.
+evm_version = "cancun"
+solc_version = "0.8.28"
+memory_limit = 1073741824
+
+# --- deployment ---------------------------------------------------------------
+# ./deploy.sh, `forge script` and `forge verify-contract` use these settings. They apply
+# at run time only. They have no effect on compilation or on the deployed
+# bytecode. The environment supplies the RPC URLs and the keys, so the
+# repository contains no secrets (see .env.example).
+[rpc_endpoints]
+sepolia = "${SEPOLIA_RPC_URL}"
+mainnet = "${MAINNET_RPC_URL}"
+
+[etherscan]
+# One Etherscan API key is sufficient for all chains with Etherscan v2.
+sepolia = { key = "${ETHERSCAN_API_KEY}", chain = 11155111 }
+mainnet = { key = "${ETHERSCAN_API_KEY}", chain = 1 }
+
+# --- lint ---------------------------------------------------------------------
+# Each finding from these two rules is a false positive for a byte-level image
+# encoder:
+#   unsafe-typecast        The casts are intentional. They get the low byte,
+#                          or the value already has the mask `& 0xFF` (PNG
+#                          chunk length bytes, RGBA channel splitting,
+#                          DEFLATE bit output).
+#   divide-before-multiply The base64 length `((n + 2) / 3) * 4` must round
+#                          the count of 3-byte groups up before it
+#                          multiplies by 4.
+# This section disables the two rules. The alternative is ~13 inline directives
+# in the hot loops.
+[lint]
+exclude_lints = ["unsafe-typecast", "divide-before-multiply"]

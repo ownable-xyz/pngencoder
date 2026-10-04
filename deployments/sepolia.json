@@ -1,0 +1,14 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "commit": "147e836",
+  "deployer": "0xAFA08732b9A1D334686B0ca5f6D9B9C6953993B0",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "timestamp": "2026-07-10T00:22:46Z",
+  "PNGEncoder": "0xbf91c1168034ca77a41dbc904552a3f7625bb923",
+  "Deflate": "0xfe7c75c11b6a28f4e36c2a0b3af8ea6dffa0ed9f",
+  "txHashes": {
+    "PNGEncoder": "0x230617d2730e6906aa73158e7e3bc66c891c0a00042ac69bc9585652ea7940bc",
+    "Deflate": "0xa676292e4e1932edb09753c0d3752e73432dbb28d82ff613dc5100e933cabee5"
+  }
+}

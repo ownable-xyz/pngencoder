@@ -1,0 +1,4 @@
+# Keep LF line endings in shell scripts. After a Windows checkout, a shebang
+# line with CRLF (`#!/usr/bin/env bash\r`) does not run. This rule keeps the
+# shell scripts runnable on all systems.
+*.sh text eol=lf

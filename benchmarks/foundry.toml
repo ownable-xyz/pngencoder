@@ -1,0 +1,13 @@
+# This is an independent buffer micro-benchmark (see ../docs/BENCHMARK.md). It
+# uses the forge-std of the parent repository at ../lib. Run this command from
+# the repository root:
+#   forge test --root benchmarks --evm-version cancun -vv   # full table incl. MCOPY
+[profile.default]
+src = "src"
+test = "test"
+out = "out"
+libs = ["../lib"]
+evm_version = "cancun"
+solc_version = "0.8.26"
+optimizer = true
+optimizer_runs = 200

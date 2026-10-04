@@ -1,0 +1,3 @@
+# Deployment records are written here by ./deploy.sh (e.g. mainnet.json,
+# sepolia.json) and are meant to be committed — they are the durable record of
+# what is deployed where, at which commit, by whom.

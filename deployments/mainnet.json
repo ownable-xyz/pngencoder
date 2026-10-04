@@ -1,0 +1,22 @@
+{
+  "network": "mainnet",
+  "chainId": 1,
+  "commit": "a3445c2",
+  "deployer": "0xAFA08732b9A1D334686B0ca5f6D9B9C6953993B0",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "timestamp": "2026-07-10T00:56:27Z",
+  "PNGEncoder": "0xaf8f886df2285a4ca847aaa1a3223d420d79e886",
+  "Deflate": "0xfe7c75c11b6a28f4e36c2a0b3af8ea6dffa0ed9f",
+  "txHashes": {
+    "PNGEncoder": "0x007afa92848fdf3f39a31fd4b55f2f0d3542abac9f5a24d1facac134c79a889d",
+    "Deflate": "0xe0e57eeefe03921d6075768326c4d607548860beb02492d5f1bce41eff3901f4"
+  },
+  "verification": {
+    "PNGEncoder": {
+      "sourceVerified": true
+    },
+    "Deflate": {
+      "sourceVerified": true
+    }
+  }
+}
