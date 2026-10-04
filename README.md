@@ -12,6 +12,15 @@ raw RGBA ──► upscale + filter ──► zlib( DEFLATE ) ──► PNG chun
 The encoder supports still images and **animated PNGs** (APNG). One frame makes
 a PNG. More than one frame makes an APNG with `acTL`, `fcTL` and `fdAT` chunks.
 
+## Deployed contracts
+
+Each link opens the contract on Etherscan.
+
+| Contract | Mainnet | Sepolia |
+|---|---|---|
+| `PNGEncoder` | [`0xAF8f886Df2285a4Ca847AAA1a3223d420d79e886`](https://etherscan.io/address/0xAF8f886Df2285a4Ca847AAA1a3223d420d79e886#code) | [`0xbF91c1168034ca77A41DBc904552a3F7625bB923`](https://sepolia.etherscan.io/address/0xbF91c1168034ca77A41DBc904552a3F7625bB923#code) |
+| `Deflate` (linked library) | [`0xFe7C75c11b6a28F4E36c2a0b3af8EA6dfFa0Ed9f`](https://etherscan.io/address/0xFe7C75c11b6a28F4E36c2a0b3af8EA6dfFa0Ed9f#code) | [`0xFe7C75c11b6a28F4E36c2a0b3af8EA6dfFa0Ed9f`](https://sepolia.etherscan.io/address/0xFe7C75c11b6a28F4E36c2a0b3af8EA6dfFa0Ed9f#code) |
+
 ## Speed
 
 An on-chain image encoder uses almost all of its gas to **copy bytes**. It
